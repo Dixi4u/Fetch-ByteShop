@@ -32,15 +32,24 @@ const app = express();
 // TODO: aqui van algunos ajustes
 
 // Middlewares
+const allowedOrigins = ["http://localhost:5173", "http://localhost:5174"];
+
 app.use(
   cors({
-    origin: "http://localhost:5173", // Dominio del cliente
-    credentials: true, // Permitir envío de cookies y credenciales
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true, // Allow cookies or authentication headers
   })
 );
 app.use(express.json());
 app.use(cookieParser());
 import { validateAuthToken } from "./src/middlewares/validateAuthToken.js";
+
 
 // Routescon validación de inicio de sesión
 /*

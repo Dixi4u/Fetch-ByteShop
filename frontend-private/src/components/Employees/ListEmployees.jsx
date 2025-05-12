@@ -2,8 +2,6 @@ import React from "react";
 import CardEmployee from "./CardEmployee";
 
 const ListEmployees = ({
-  setId,
-  setActiveTab,
   deleteEmployee,
   updateEmployee,
   loading,
@@ -17,7 +15,7 @@ const ListEmployees = ({
       <div className="flex flex-wrap gap-4 justify-center mt-5">
         {loading && <div className="text-center text-gray-500">Loading...</div>}
 
-        {Array.isArray(employees) && employees.map((employee) => (
+        {employees?.map((employee) => (
           <CardEmployee
             key={employee._id}
             employee={employee}
@@ -25,10 +23,6 @@ const ListEmployees = ({
             updateEmployee={updateEmployee}
           />
         ))}
-
-        {!loading && (!employees || !Array.isArray(employees)) && (
-          <div className="text-center text-gray-500">No employees found.</div>
-        )}
       </div>
     </>
   );

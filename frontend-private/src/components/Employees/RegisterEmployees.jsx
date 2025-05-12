@@ -2,7 +2,6 @@ import React from "react";
 
 const RegisterEmployees = ({
   id,
-  setId,
   name,
   setName,
   lastName,
@@ -23,22 +22,14 @@ const RegisterEmployees = ({
   setHireDate,
   isssNumber,
   setIsssNumber,
-  error,
-  setError,
-  success,
-  setSuccess,
-  loading,
-  setLoading,
-  employees,
-  setEmployees,
-  cleanData,
+ 
   handleSubmit,
   handleUpdate,
 }) => {
   return (
     <>
       <form className="max-w-lg mx-auto p-4 bg-white shadow-md rounded mb-5">
-        <h1 className="text-2xl ">Id a modificar {id}</h1>
+        <h1 className="text-2xl hidden">Id a modificar {id}</h1>
         <div className="grid grid-cols-2 gap-4">
           <div className="mb-4">
             <label
@@ -161,14 +152,22 @@ const RegisterEmployees = ({
             >
               Fecha de Nacimiento
             </label>
-            <input
+{birthdate ?            <input
               type="date"
               id="birthdate"
               value={birthdate}
               onChange={(e) => setBirthdate(e.target.value)}
               name="birthdate"
               className="w-full px-3 py-2 border rounded"
-            />
+              readOnly={true}
+            /> :           <input
+            type="date"
+            id="birthdate"
+            value={birthdate}
+            onChange={(e) => setBirthdate(e.target.value)}
+            name="birthdate"
+            className="w-full px-3 py-2 border rounded"
+          /> }
           </div>
           <div className="mb-4">
             <label
